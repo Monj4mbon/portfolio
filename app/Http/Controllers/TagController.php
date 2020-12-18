@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\About;
-use App\Models\Presentation;
-use App\Models\Project;
 use App\Models\Tag;
-use App\Models\Welcome;
 use Illuminate\Http\Request;
 
-class WelcomeController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +14,7 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        $projectData = Project::all();
-        $presentationData = Presentation::all();
-        $aboutData = About::all();
-        $showTag = Tag::all();
-        return view('welcome', compact('projectData', 'presentationData', 'aboutData', 'showTag'));
+        //
     }
 
     /**
@@ -32,7 +24,8 @@ class WelcomeController extends Controller
      */
     public function create()
     {
-
+        $tagData = Tag::all();
+        return view('tags', compact('tagData'));
     }
 
     /**
@@ -43,16 +36,24 @@ class WelcomeController extends Controller
      */
     public function store(Request $request)
     {
-        $newDiv = new Welcome;
+        $request->validate([
+            'name' => "required",
+            'HTML' => "required",
+        ]);
+        $newTag = new Tag;
+        $newTag->name = $request->name;
+        $newTag->HTML = $request->HTML;
+        $newTag->save();
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Welcome  $welcome
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Welcome $welcome)
+    public function show(Tag $tag)
     {
         //
     }
@@ -60,34 +61,41 @@ class WelcomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Welcome  $welcome
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Welcome $welcome)
+    public function edit($id)
     {
-        //
+        $editTag =Tag::find($id);
+        return view('edit_tags', compact('editTag'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Welcome  $welcome
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Welcome $welcome)
+    public function update(Request $request, $id)
     {
-        //
+        $newTag = Tag::find($id);
+        $newTag->name = $request->name;
+        $newTag->HTML = $request->HTML;
+        $newTag->save();
+        return redirect('admin/tags');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Welcome  $welcome
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Welcome $welcome)
+    public function destroy($id)
     {
-        //
+        $newTag = Tag::find($id);
+        $newTag->delete();
+        return redirect()->back();
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
+use App\Models\About;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ProjectController extends Controller
+class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('project');
+        return view('about');
     }
 
     /**
@@ -25,8 +25,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $projectData = Project::all();
-        return view('project', compact('projectData'));
+        $aboutData = About::all();
+        return view('about', compact('aboutData'));
     }
 
     /**
@@ -38,74 +38,73 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => "required",
-            'text' => "required",
+            'title' => "required",
+            'content' => "required",
             'src' => "required"
         ]);
-        $newProject = new Project;
-        $newProject->name = $request->name;
-        $newProject->text = $request->text;
-        $newProject->src = $request->file('src')->hashName();
+        $newAbout = new About;
+        $newAbout->title = $request->title;
+        $newAbout->content = $request->content;
+        $newAbout->src = $request->file('src')->hashName();
         $request->file('src')->storePublicly('images', 'public');
-        $newProject->save();
+        $newAbout->save();
         return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\About  $about
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(About $about)
     {
-        $showProject = Project::all();
-        return view('show_project', compact('showProject'));
+        $showAbout = About::all();
+        return view('show_about', compact('showAbout'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\About  $about
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $editProject = Project::find($id);
-        return view('edit_project', compact('editProject'));
+        $editAbout = About::find($id);
+        return view('edit_about', compact('editAbout'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\About  $about
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-
-        $newProject = Project::find($id);
-        $newProject->name = $request->name;
-        $newProject->text = $request->text;
-        Storage::disk('public')->delete('images/'.$newProject->src);
-        $newProject->src = $request->file('src')->hashName();
+        $newAbout = About::find($id);
+        $newAbout->title = $request->title;
+        $newAbout->content = $request->content;
+        Storage::disk('public')->delete('images/'.$newAbout->src);
+        $newAbout->src = $request->file('src')->hashName();
         $request->file('src')->storePublicly('images', 'public');
-        $newProject->save();
-        return redirect('admin/project');
+        $newAbout->save();
+        return redirect('admin/about');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\About  $about
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $newProject = Project::find($id);
-        $newProject->delete();
-        Storage::disk('public')->delete('images/'.$newProject->src);
+        $newAbout = About::find($id);
+        $newAbout->delete();
+        Storage::disk('public')->delete('images/'.$newAbout->src);
         return redirect()->back();
     }
 }

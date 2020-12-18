@@ -259,18 +259,13 @@ return [
         ],
         [
             'text' => 'About',
-            'url'  => 'admin/project',
+            'url'  => 'admin/about',
             'icon' => 'fas fa-child',
         ],
         [
             'text' => 'Tags',
-            'url'  => 'admin/project',
+            'url'  => 'admin/tags',
             'icon' => 'fas fa-tags',
-        ],
-        [
-            'text' => 'Contact',
-            'url'  => 'admin/project',
-            'icon' => 'fas fa-address-card',
         ],
         [
             'text'    => 'Creation',
@@ -278,7 +273,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Présentation',
-                    'url'  => '#',
+                    'url'  => '/presentation',
                 ],
                 [
                     'text' => 'Projets',
@@ -286,11 +281,11 @@ return [
                 ],
                 [
                     'text' => 'About',
-                    'url'  => '#',
+                    'url'  => '/about',
                 ],
                 [
                     'text' => 'Tags',
-                    'url'  => '#',
+                    'url'  => '/tags',
                 ],
             ],
         ],

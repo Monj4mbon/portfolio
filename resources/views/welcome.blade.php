@@ -3,7 +3,7 @@
 @section('content')  
 <!-- Page Content-->
 <div class="container-fluid p-0">
-    <!-- About-->
+    <!-- Presentation-->
     <section class="resume-section" id="presentation">
         <div class="resume-section-content">
             <h1 class="mb-0">
@@ -14,11 +14,16 @@
                 42 Edoras, Tatooine. 0 123 45 67 89.
                 <a href="mailto:name@email.com">hotmail.yahoo@gmail.com</a>
             </div>
-            <p class="lead mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam sed nulla quasi officia repellat temporibus quae voluptatibus ex quis quam quidem iure deleniti harum, earum voluptates, eos voluptatum vitae perspiciatis.</p>
+            @foreach ($presentationData as $presentation)
+                <div>
+                    <h3>{{$presentation->title}}</h3>
+                    <p class="lead mb-5">{{$presentation->content}}</p>
+                </div>
+            @endforeach
         </div>
     </section>
     <hr class="m-0" />
-    <!-- Experience-->
+    <!-- Project-->
     <section class="resume-section" id="project">
         <div class="resume-section-content d-flex flex-column">
             <h2 class="mb-5">Projects :</h2>
@@ -44,55 +49,70 @@
         </div>
     </section>
     <hr class="m-0" />
-    <!-- Education-->
+    <!-- About-->
     <section class="resume-section" id="about">
         <div class="resume-section-content">
             <h2 class="mb-5">A propos :</h2>
-            <div class="card mb-3">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            @foreach ($aboutData as $about)
+                <div class="card mb-3">                        
+                    <img src="{{$about->src}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{$about->title}}</h5>
+                        <p class="card-text">{{$about->content}}</p>
+                    </div>
                 </div>
-              </div>
+            @endforeach
         </div>
     </section>
     <hr class="m-0" />
-    <!-- Skills-->
+    <!-- Tags-->
     <section class="resume-section" id="tags">
         <div class="resume-section-content">
             <h2 class="mb-5">Tags :</h2>
             <div class="subheading mb-3"></div>
             <ul class="list-inline dev-icons">
-                <li class="list-inline-item"><i class="fab fa-html5"></i></li>
-                <li class="list-inline-item"><i class="fab fa-css3-alt"></i></li>
-                <li class="list-inline-item"><i class="fab fa-js-square"></i></li>
-                <li class="list-inline-item"><i class="fab fa-react"></i></li>
-                <li class="list-inline-item"><i class="fab fa-sass"></i></li>
-                <li class="list-inline-item"><i class="fab fa-wordpress"></i></li>
-                <li class="list-inline-item"><i class="fab fa-npm"></i></li>
-                <li class="list-inline-item"><i class="fab fa-laravel"></i></li>
-                <li class="list-inline-item"><i class="fab fa-php"></i></li>
+                @foreach ($showTag as $tag)
+                    <li class="list-inline-item"><i class="{{$tag->HTML}}"></i></li>
+                @endforeach
             </ul>
             <a href="/allTags" class="btn btn-info">Visiter les projets par Tags</a>
         </div>
     </section>
     <hr class="m-0" />
-    <!-- Interests-->
-    <section class="resume-section" id="contact">
-        <div class="resume-section-content">
-            <h2 class="mb-5">Contact :</h2>
-            <p>Apart from being a web developer, I enjoy most of my time being outdoors. In the winter, I am an avid skier and novice ice climber. During the warmer months here in Colorado, I enjoy mountain biking, free climbing, and kayaking.</p>
-            <p class="mb-0">When forced indoors, I follow a number of sci-fi and fantasy genre movies and television shows, I am an aspiring chef, and I spend a large amount of my free time exploring the latest technology advancements in the front-end web development world.</p>
+    <!-- Contact-->
+    <div>
+        <section class="resume-section mb-0 pb-0" id="contact">
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h2 class="border-bottom border-gray pb-2 mb-0">Contact</h2>
+                <form action="{{route('mails.store')}}" method="POST" class="mt-2">   
+                    @csrf         
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmailSubject1">Email subject</label>
+                        <input type="text" class="form-control" id="exampleInputEmailSubject1" aria-describedby="emailHelp" placeholder="Enter email subject" name="emailSubject">
+                    </div>         
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Text</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </section>
+        <div class="subheading  mx-5 mb-5">
+            42 Edoras, Tatooine. 0 123 45 67 89.
+            <a href="mailto:name@email.com">hotmail.yahoo@gmail.com</a>
         </div>
-        <p></p>
-        <div class="social-icons">
-            <a class="social-icon" href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a class="social-icon" href="#"><i class="fab fa-github"></i></a>
-            <a class="social-icon" href="#"><i class="fab fa-twitter"></i></a>
-            <a class="social-icon" href="#"><i class="fab fa-facebook-f"></i></a>
+        <div class="social-icons mx-5 mb-5">
+            <a class="social-icon" href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
+            <a class="social-icon" href="https://github.com/"><i class="fab fa-github"></i></a>
+            <a class="social-icon" href="https://twitter.com/?lang=fr"><i class="fab fa-twitter"></i></a>
+            <a class="social-icon" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
         </div>
-    </section>
+
+    </div>
 </div>
 @endsection
