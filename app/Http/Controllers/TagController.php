@@ -55,7 +55,8 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $showTag = Tag::all();
+        return view('show_tags', compact('showTag'));
     }
 
     /**

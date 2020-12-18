@@ -24,30 +24,68 @@
     </section>
     <hr class="m-0" />
     <!-- Project-->
-    <section class="resume-section" id="project">
-        <div class="resume-section-content d-flex flex-column">
-            <h2 class="mb-5">Projects :</h2>
-            <div class="row">
-                @foreach ($projectData as $project)
-                    <div class="col-4">
-                        <div class="card text-white bg-info mb-3" style="width: 18rem;">
-                            <img width="200px" height="200px" src="{{asset('images/' .$project->src)}}" class="card-img-top">
-                            <div class="card-header">
-                                <h5 class="card-title">{{$project->name}}</h5>
-                            </div>
-                            <div class="card-body">
-                              <p class="card-text">{{$project->text}}</p>
+    <div>
+        <section class="resume-section" id="project">
+            <div class="resume-section-content d-flex flex-column">
+                <h2 class="mb-5">Projects :</h2>
+                <div class="row">
+                    @foreach ($projectData as $project)
+                        <div class="col-4">
+                            <div class="card text-white bg-info mb-3" style="width: 18rem;">
+                                <img width="200px" height="200px" src="{{asset('images/' .$project->src)}}" class="card-img-top">
+                                <div class="card-header">
+                                    <h5 class="card-title">{{$project->name}}</h5>
+                                </div>
+                                <div class="card-body">
+                                  <p class="card-text">{{$project->text}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @if ($loop->iteration % 3 == 0)
-                        </div>
-                        <div class="row">
-                    @endif
-                @endforeach
+                        @if ($loop->iteration % 3 == 0)
+                            </div>
+                            <div class="row">
+                        @endif
+                    @endforeach
+                </div>
             </div>
+        </section>
+        <div>
+            <div id="carouselExampleControls" class="carousel slide container" style="max-width: 50%
+            ;text-align: center" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img class="d-block w-100" src="../../assets/img/profile.jpg" alt="First slide">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h5>First slide</h5>
+                        <p>...</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="../../assets/img/profile.jpg" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Second slide</h5>
+                        <p>...</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="../../assets/img/profile.jpg" alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Third slide</h5>
+                        <p>...</p>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
         </div>
-    </section>
+    </div>
     <hr class="m-0" />
     <!-- About-->
     <section class="resume-section" id="about">

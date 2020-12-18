@@ -49,10 +49,10 @@ Route::get('/admin/about/delete/{id}', [AboutController::class, 'destroy']);
 
 Route::get('/tags', [TagController::class, 'create']);
 Route::post('/tag_store', [TagController::class, 'store']);
-Route::get('/admin/tag', [TagController::class, 'show']);
-Route::get('/admin/tag/edit/{id}', [TagController::class, 'edit']);
-Route::post('/admin/tag/update/{id}', [TagController::class, 'update']);
-Route::get('/admin/tag/delete/{id}', [TagController::class, 'destroy']);
+Route::get('/admin/tags', [TagController::class, 'show']);
+Route::get('/admin/tags/edit/{id}', [TagController::class, 'edit']);
+Route::post('/admin/tags/update/{id}', [TagController::class, 'update']);
+Route::get('/admin/tags/delete/{id}', [TagController::class, 'destroy']);
 
 
 Route::resource('mails', MailSendedController::class);
